@@ -1,0 +1,128 @@
+import React, { useState } from "react";
+import PostCard from "./components/PostCard/PostCard";
+import "./App.css";
+
+const posts = [
+  {
+    id: 1,
+    type: "video",
+    src: "/src/assets/asset_majalengka/VID-20250212-WA0003.mp4",
+    caption: "Video Tampak Depan Rumah",
+  },
+  {
+    id: 2,
+    type: "video",
+    src: "/src/assets/asset_majalengka/VID-20250213-WA0001.mp4",
+    caption: "Video Tampak Dalam Rumah",
+  },
+  {
+    id: 3,
+    type: "video",
+    src: "/src/assets/asset_majalengka/VID-20250212-WA0001.mp4",
+    caption: "Video Tampak Depan Rumah",
+  },
+  {
+    id: 4,
+    type: "video",
+    src: "/src/assets/asset_majalengka/VID-20250212-WA0002.mp4",
+    caption: "Video Tampak Dari Sdn Sukamulya",
+  },
+  {
+    id: 5,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0025.jpg",
+    caption: "Pemandangan indah dari atas bukit.",
+  },
+  {
+    id: 6,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0036.jpg",
+    caption: "Pemandangan indah dari atas bukit.",
+  },
+  {
+    id: 7,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0027.jpg",
+    caption: "Suasana pagi di taman.",
+  },
+  {
+    id: 8,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0038.jpg",
+    caption: "Suasana pagi di taman.",
+  },
+  {
+    id: 9,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0032.jpg",
+    caption: "Suasana pagi di taman.",
+  },
+  {
+    id: 10,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0035.jpg",
+    caption: "Suasana pagi di taman.",
+  },
+  {
+    id: 11,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0036.jpg",
+    caption: "Suasana pagi di taman.",
+  },
+  {
+    id: 12,
+    type: "image",
+    src: "/src/assets/asset_majalengka/IMG-20250212-WA0040.jpg",
+    caption: "Suasana pagi di taman.",
+  },
+];
+
+const App = () => {
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPost(null);
+  };
+
+  return (
+    <div className="app">
+      <h1 className="title">Dijual Rumah</h1>
+      <div className="post-grid">
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            type={post.type}
+            src={post.src}
+            caption={post.caption}
+            onClick={() => handlePostClick(post)}
+          />
+        ))}
+      </div>
+
+      {selectedPost && (
+        <div className="modal" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {selectedPost.type === "image" ? (
+              <img src={selectedPost.src} alt={selectedPost.caption} />
+            ) : (
+              <video controls>
+                <source src={selectedPost.src} type="video/mp4" />
+                Browser Anda tidak mendukung video ini.
+              </video>
+            )}
+            <p>{selectedPost.caption}</p>
+            <button className="close-button" onClick={handleCloseModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
