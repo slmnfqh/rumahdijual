@@ -93,6 +93,8 @@ const App = () => {
         <ul>
           <li>
             <span>Luas Tanah:</span> 19,5 Bata.
+            <br />
+            (1 Bata = 14 meter persegi)
           </li>
           <li>
             <span>Sertifikat Hak Milik (SHM):</span> a.n SAMSURI.
